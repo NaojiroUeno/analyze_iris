@@ -250,10 +250,10 @@ class AnalyzeIris:
                 print(
                     "train score: {:.3f}".format(model.score(X_train_scaled, y_train))
                 )
-                for i in range(num):
-                    row = i
+                for index in range(num):
+                    row = index
                     col = count
-                    x_col_index, y_col_index = pattern[i]
+                    x_col_index, y_col_index = pattern[index]
                     train_x_axis, train_y_axis = X_train_scaled[:, x_col_index], X_train_scaled[:, y_col_index]
                     test_x_axis, test_y_axis = X_test_scaled[:, x_col_index], X_test_scaled[:, y_col_index]
 
@@ -277,15 +277,15 @@ class AnalyzeIris:
         """
         plt.figure(figsize=(8, 6))
 
-        for i in range(len(self.target_names)):
-            classData = data[label == i]
+        for index in range(len(self.target_names)):
+            classData = data[label == index]
             if scaler != None:
                 classData_scaled = scaler.transform(classData)
             else:
                 classData_scaled = classData
             classData_featureAnarysis = featureAnarysis.transform(classData_scaled)
             plt.scatter(
-                classData_featureAnarysis[:, 0], classData_featureAnarysis[:, 1], marker=self.marker_list[i % 9]
+                classData_featureAnarysis[:, 0], classData_featureAnarysis[:, 1], marker=self.marker_list[index % 9]
             )
 
         plt.legend(self.target_names, loc=4)
